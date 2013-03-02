@@ -16,10 +16,10 @@ const float min_angle = 0.0;
 
 
 struct Colour {
-	Uint8 red;
-	Uint8 green;
-	Uint8 blue;
-	Uint8 transparency;
+	Uint8 r;
+	Uint8 g;
+	Uint8 b;
+	Uint8 a;
 };
 
 struct Size {
@@ -37,12 +37,6 @@ struct Transition {
 	int t_y;
 };
 
-typedef struct                       /**** BMP file header structure ****/
-{
-    unsigned short bfType;           /* Magic number for file */
-    unsigned int   bfSize;           /* Size of file */
-    unsigned short bfReserved1;      /* Reserved */
-    unsigned short bfReserved2;      /* ... */
-    unsigned int   bfOffBits;        /* Offset to bitmap data */
-} BITMAPFILEHEADER;
-#endif /* UTILS_H_ */
+int index2Dto1D();
+
+std::pair<int, int> index1Dto2D();

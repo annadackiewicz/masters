@@ -13,17 +13,17 @@
 
 class Image {
 public:
-	Image(int _size_x, int size_y);
+	Image(int _width, int _height);
 	virtual ~Image();
 
 private:
 	int id;
-	const int size_x;
-	const int size_y;
+	unsigned width;
+	unsigned height;
 
 	Colour* image[];
 
-	bool loadImage();
+	bool loadImage(const char* filename);
 };
 
 #endif /* IMAGE_H_ */

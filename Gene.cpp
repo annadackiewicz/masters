@@ -52,11 +52,11 @@ void Gene::mutateScale(Uint8 ds_x, Uint8 ds_y) {
   scale.s_y += ds_y;
 }
 
-void Gene::mutateColour(Uint8 d_r, Uint8 d_g, Uint8 d_b, Uint8 d_t) {
-  colour.red += d_r;
-  colour.green += d_g;
-  colour.blue += d_b;
-  colour.transparency += d_t;
+void Gene::mutateColour(Uint8 d_r, Uint8 d_g, Uint8 d_b, Uint8 d_a) {
+  colour.r += d_r;
+  colour.g += d_g;
+  colour.b += d_b;
+  colour.a += d_a;
 }
 
 void Gene::mutateAngle(float d_angle) {

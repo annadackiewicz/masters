@@ -16,6 +16,9 @@ public:
 	Image(int _width, int _height);
 	virtual ~Image();
 
+	bool loadImage(const char* filename);
+	bool saveImage(const char* filename);
+
 private:
 	int id;
 	unsigned width;
@@ -23,7 +26,8 @@ private:
 
 	Colour* image[];
 
-	bool loadImage(const char* filename);
+	void readVectorToImage(const std::vector<unsigned char>& _image);
+	std::vector<unsigned char> readImageToVector() const;
 };
 
 #endif /* IMAGE_H_ */

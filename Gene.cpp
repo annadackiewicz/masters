@@ -8,13 +8,21 @@
 
 #include "Gene.h"
 
-Gene::Gene() {
-	// TODO Auto-generated constructor stub
+#include <cstdlib>
 
-}
+#define SCALE_DIFF_FROM_ONE 0.1
+#define SCALE_DIVIDE_BY 20
 
-Gene::~Gene() {
-	// TODO Auto-generated destructor stub
+Gene::Gene(std::auto_ptr<Image> _shape, int _width, int _height) {
+	shape = _shape;
+	size = Size(_width, _height);
+	colour = Colour(rand() % 255, rand() % 255, rand() % 255, rand() % 255);
+	transition = Transition(rand() % _width, rand() % _height);
+	int rand_sc_x = rand() / RAND_MAX / SCALE_DIVIDE_BY
+			- SCALE_DIFF_FROM_ONE + 1;
+	int rand_sc_y = rand() / RAND_MAX / SCALE_DIVIDE_BY
+			- SCALE_DIFF_FROM_ONE + 1;
+	scale = Scale(rand_sc_x, rand_sc_y);
 }
 
 const Transition Gene::getConstTransition() {
@@ -34,8 +42,6 @@ const std::auto_ptr<Image> Gene::getImage() {
   return image_changed;
 }
 
-
-
 void Gene::mutateTransition(int dt_x, int dt_y) {
   transition.t_x += dt_x;
   if (transition.t_x > size.x) {
@@ -43,7 +49,7 @@ void Gene::mutateTransition(int dt_x, int dt_y) {
   }
   transition.t_y += dt_y;
   if (transition.t_y > size.y) {
-    transition.t_y -+ size.y;
+	transition.t_y -= size.y;
   }
 }
 
@@ -68,5 +74,4 @@ void Gene::mutateAngle(float d_angle) {
     angle += max_angle;
   }
 }
-
 

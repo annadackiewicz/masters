@@ -21,6 +21,9 @@ Image::Image(int _width, int _height) :
 
 Image::~Image() {
 	// TODO Auto-generated destructor stub
+	if (image) {
+		delete [] image;
+	}
 }
 
 

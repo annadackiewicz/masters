@@ -12,7 +12,6 @@
 #include <memory>
 
 #include "Utils.h"
-//#include "Image.h"
 
 #define Uint8 unsigned char
 
@@ -20,7 +19,7 @@ class Image;
 
 class Gene {
 public:
-	Gene();
+	Gene(std::auto_ptr<Image> _shape, int _width, int _height);
 	virtual ~Gene();
 
 	const Transition getConstTransition();

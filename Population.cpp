@@ -1,8 +1,9 @@
 /*
  * Population.cpp
  *
- *  Created on: Jan 1, 2013
- *      Author: ania
+ *      Author: Anna Dackiewicz.
+ *      Master's thesis: Paralel computations in evolutionary algorithms with
+ *                       tiling.
  */
 
 #include "Population.h"

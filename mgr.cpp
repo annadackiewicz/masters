@@ -1,10 +1,10 @@
-//============================================================================
-// Name        : mgr.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+/*
+ * mgr.cpp
+ *
+ *      Author: Anna Dackiewicz.
+ *      Master's thesis: Paralel computations in evolutionary algorithms with
+ *                       tiling.
+ */
 
 #include <iostream>
 using namespace std;

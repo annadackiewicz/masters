@@ -19,6 +19,9 @@ public:
 	bool loadImage(const char* filename);
 	bool saveImage(const char* filename);
 
+	unsigned getWidth();
+	unsigned getHeight();
+
 private:
 	int id;
 	unsigned width;

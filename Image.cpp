@@ -62,3 +62,11 @@ std::vector<unsigned char> Image::readImageToVector() const {
 	}
 	return _image;
 }
+
+unsigned Image::getWidth() {
+	return width;
+}
+
+unsigned Image::getHeight() {
+	return height;
+}

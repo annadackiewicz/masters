@@ -14,6 +14,11 @@
 const float max_angle = 2.0;
 const float min_angle = 0.0;
 
+const float scale_diff_from_one = 0.1;
+const int scale_divide_by = 20;
+
+const float mutate_ratio = 0.2;
+
 
 struct Colour {
 	Uint8 r;
@@ -28,8 +33,8 @@ struct Size {
 };
 
 struct Scale {
-	Uint8 s_x;
-	Uint8 s_y;
+	float s_x;
+	float s_y;
 };
 
 struct Transition {

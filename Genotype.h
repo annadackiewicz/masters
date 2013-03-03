@@ -13,16 +13,19 @@
 
 class Genotype {
 public:
-	Genotype(int number_of_genes, std::auto_ptr<Image> _true_image, std::vector<std::auto_ptr<Image> > _shapes);
+	Genotype(int number_of_genes, std::shared_ptr<Image> _true_image, std::vector<std::auto_ptr<Image> > _shapes);
+	Genotype(std::shared_ptr<Genotype> genotype);
 	virtual ~Genotype();
 
 	void mutate();
+	void createImage();
+	//void
 
 private:
 	std::vector<Gene> genes;
 	std::auto_ptr<Image> image;
-	std::auto_ptr<Image> true_image;
-	std::vector<std::auto_ptr<Image> > shapes;
+	std::shared_ptr<Image> true_image;
+	std::vector<std::shared_ptr<Image> > shapes;
 };
 
 #endif /* GENOTYPE_H_ */

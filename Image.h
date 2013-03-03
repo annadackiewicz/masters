@@ -22,6 +22,7 @@ public:
 	unsigned getWidth();
 	unsigned getHeight();
 
+
 private:
 	int id;
 	unsigned width;

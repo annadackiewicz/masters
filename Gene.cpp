@@ -9,19 +9,20 @@
 #include "Gene.h"
 
 #include <cstdlib>
+#include "Utils.h"
 
 #define SCALE_DIFF_FROM_ONE 0.1
 #define SCALE_DIVIDE_BY 20
 
-Gene::Gene(std::auto_ptr<Image> _shape, int _width, int _height) {
+Gene::Gene(std::shared_ptr<Image> _shape, int _width, int _height) {
 	shape = _shape;
 	size = Size(_width, _height);
 	colour = Colour(rand() % 255, rand() % 255, rand() % 255, rand() % 255);
 	transition = Transition(rand() % _width, rand() % _height);
-	int rand_sc_x = rand() / RAND_MAX / SCALE_DIVIDE_BY
-			- SCALE_DIFF_FROM_ONE + 1;
-	int rand_sc_y = rand() / RAND_MAX / SCALE_DIVIDE_BY
-			- SCALE_DIFF_FROM_ONE + 1;
+	int rand_sc_x = rand() / RAND_MAX / scale_divide_by
+			- scale_diff_from_one + 1;
+	int rand_sc_y = rand() / RAND_MAX / scale_divide_by
+			- scale_diff_from_one + 1;
 	scale = Scale(rand_sc_x, rand_sc_y);
 }
 
@@ -38,8 +39,16 @@ const Colour Gene::getConstColour() {
 double Gene::getAngle() {
   return angle;
 }
-const std::auto_ptr<Image> Gene::getImage() {
+const std::shared_ptr<Image> Gene::getImage() {
   return image_changed;
+}
+
+void Gene::mutate(std::shared_ptr<Image> _shape) {
+	shape = _shape;
+	mutateTransition(rand() % size.x, rand() % size.y);
+	mutateScale(rand() / RAND_MAX / 10, rand() / RAND_MAX / 10);
+	mutateColour(rand() % 255, rand() % 255, rand() % 255, rand() % 255);
+	mutateAngle(rand() / RAND_MAX / 10);
 }
 
 void Gene::mutateTransition(int dt_x, int dt_y) {
@@ -53,7 +62,7 @@ void Gene::mutateTransition(int dt_x, int dt_y) {
   }
 }
 
-void Gene::mutateScale(Uint8 ds_x, Uint8 ds_y) {
+void Gene::mutateScale(float ds_x, float ds_y) {
   scale.s_x += ds_x;
   scale.s_y += ds_y;
 }

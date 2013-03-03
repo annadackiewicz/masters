@@ -8,24 +8,19 @@
 
 #include "Image.h"
 
-
-//#include <boost/gil/extension/io/jpeg_dynamic_io.hpp>
 //#include <boost/gil>
 #include <cassert>
 
 Image::Image(int _width, int _height) :
-	width(_width), height(_height) {
-	// TODO Auto-generated constructor stub
+		width(_width), height(_height) {
 	image = new Colour[width * height];
 }
 
 Image::~Image() {
-	// TODO Auto-generated destructor stub
 	if (image) {
 		delete [] image;
 	}
 }
-
 
 bool Image::loadImage(const char* filename) {
 	  std::vector<unsigned char> image; //The raw pixels.
@@ -37,6 +32,14 @@ bool Image::saveImage(const char* filename) {
 	std::vector<unsigned char> image = readImageToVector();
 	unsigned error = lodepng::encode(filename, image, width, height);
 	return !error;
+}
+
+unsigned Image::getWidth() {
+	return width;
+}
+
+unsigned Image::getHeight() {
+	return height;
 }
 
 void Image::readVectorToImage(const std::vector<unsigned char>& _image) {
@@ -61,12 +64,4 @@ std::vector<unsigned char> Image::readImageToVector() const {
 		_image.push_back(image[i]->a);
 	}
 	return _image;
-}
-
-unsigned Image::getWidth() {
-	return width;
-}
-
-unsigned Image::getHeight() {
-	return height;
 }

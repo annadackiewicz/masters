@@ -11,9 +11,13 @@
 
 #include "Gene.h"
 
+#include <vector>
+
 class Genotype {
 public:
-	Genotype(int number_of_genes, std::shared_ptr<Image> _true_image, std::vector<std::auto_ptr<Image> > _shapes);
+	Genotype(int number_of_genes,
+			std::shared_ptr<Image> _true_image,
+			std::vector<std::shared_ptr<Image> > _shapes);
 	Genotype(std::shared_ptr<Genotype> genotype);
 	virtual ~Genotype();
 
@@ -22,8 +26,8 @@ public:
 	//void
 
 private:
-	std::vector<Gene> genes;
-	std::auto_ptr<Image> image;
+	std::vector<std::shared_ptr<Gene> > genes;
+	std::shared_ptr<Image> image;
 	std::shared_ptr<Image> true_image;
 	std::vector<std::shared_ptr<Image> > shapes;
 };

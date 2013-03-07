@@ -13,14 +13,12 @@
 
 #include "Utils.h"
 
-#define Uint8 unsigned char
-
 class Image;
 
 class Gene {
 public:
 	Gene(std::shared_ptr<Image> _shape, int _width, int _height);
-	virtual ~Gene();
+	~Gene();
 
 	const Transition getConstTransition();
 	const Scale getConstScale();

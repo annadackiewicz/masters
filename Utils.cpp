@@ -8,11 +8,10 @@
 
 #include "Utils.h"
 
-
 int index2Dto1D(int x, int y, int width) {
 	return y*width+x;
 }
 
 std::pair<int, int> index1Dto2D(int index, int width) {
-	return std::pair(index%width, (int)(index/width));
+	return std::pair<int, int>(index%width, (int)(index/width));
 }

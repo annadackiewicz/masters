@@ -9,22 +9,23 @@
 #include "Image.h"
 
 //#include <boost/gil>
+#include "Utils.h"
+#include "lodepng.h"
 #include <cassert>
 
-Image::Image(int _width, int _height) :
+Image::Image(unsigned _width, unsigned _height) :
 		width(_width), height(_height) {
-	image = new Colour[width * height];
+	image.resize(width * height);
 }
 
 Image::~Image() {
-	if (image) {
-		delete [] image;
-	}
+
 }
 
 bool Image::loadImage(const char* filename) {
-	  std::vector<unsigned char> image; //The raw pixels.
-	  unsigned error = lodepng::decode(image, width, height, filename);
+	  std::vector<unsigned char> _image; //The raw pixels.
+	  unsigned error = lodepng::decode(_image, width, height, filename);
+	  readVectorToImage(_image);
 	  return !error;
 }
 
@@ -43,11 +44,9 @@ unsigned Image::getHeight() {
 }
 
 void Image::readVectorToImage(const std::vector<unsigned char>& _image) {
-	delete[] image;
-	image = new Colour[width * height];
-
-	for (int i = 0; i < _image.size(); i += 4) {
-		int index = i/4;
+	image.resize(width * height);
+	for (unsigned i = 0; i < _image.size(); i += 4) {
+		unsigned index = i/4;
 		image[index]->r = _image[i];
 		image[index]->g = _image[i+1];
 		image[index]->b = _image[i+2];
@@ -57,7 +56,7 @@ void Image::readVectorToImage(const std::vector<unsigned char>& _image) {
 
 std::vector<unsigned char> Image::readImageToVector() const {
 	std::vector<unsigned char> _image;
-	for (int i = 0; i < width * height; ++i) {
+	for (unsigned i = 0; i < width * height; ++i) {
 		_image.push_back(image[i]->r);
 		_image.push_back(image[i]->g);
 		_image.push_back(image[i]->b);

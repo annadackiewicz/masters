@@ -9,14 +9,19 @@
 #include "Genotype.h"
 
 #include <cstdlib>
+#include "Gene.h"
+#include "Image.h"
+
 
 Genotype::Genotype(int number_of_genes, std::shared_ptr<Image> _true_image,
-		std::vector<std::auto_ptr<Image> > _shapes) :
-		shapes(_shapes), true_image (_true_image) {
+		std::vector<std::shared_ptr<Image> > _shapes) :
+		shapes(_shapes),
+		true_image (_true_image) {
 	for (int i = 0; i < number_of_genes; ++i) {
-		Gene* gene = new Gene(shapes[rand() % shapes.size()],
-					_true_image->getWidth(), _true_image->getHeight());
-
+		std::shared_ptr<Gene> gene;
+		gene.reset(new Gene(shapes[rand() % shapes.size()],
+				_true_image->getWidth(), _true_image->getHeight()));
+		genes.push_back(gene);
 	}
 }
 
@@ -31,9 +36,9 @@ Genotype::~Genotype() {
 
 
 void Genotype::mutate() {
-	for (int i = 0; i < genes.size(); ++i) {
+	for (unsigned i = 0; i < genes.size(); ++i) {
 		if (rand() / RAND_MAX > mutate_ratio) {
-			genes[i].mutate(shapes[rand() % shapes.size()]);
+			genes[i]->mutate(shapes[rand() % shapes.size()]);
 		}
 	}
 }

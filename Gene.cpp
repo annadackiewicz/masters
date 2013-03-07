@@ -9,10 +9,6 @@
 #include "Gene.h"
 
 #include <cstdlib>
-#include "Utils.h"
-
-#define SCALE_DIFF_FROM_ONE 0.1
-#define SCALE_DIVIDE_BY 20
 
 Gene::Gene(std::shared_ptr<Image> _shape, int _width, int _height) {
 	shape = _shape;
@@ -24,6 +20,10 @@ Gene::Gene(std::shared_ptr<Image> _shape, int _width, int _height) {
 	int rand_sc_y = rand() / RAND_MAX / scale_divide_by
 			- scale_diff_from_one + 1;
 	scale = Scale(rand_sc_x, rand_sc_y);
+}
+
+Gene::~Gene() {
+
 }
 
 const Transition Gene::getConstTransition() {
